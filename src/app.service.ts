@@ -11,7 +11,7 @@ export class AppService {
   }
 
   getHelloFrances(): string {
-    return 'mi mensaje de pruebas';
+    return 'Bonjour le monde!';
   }
 
   getHelloEspanol(): string {

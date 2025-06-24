@@ -15,4 +15,9 @@ describe('DbManagerService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  
+    it('Deberia buscar un id por usuario', () => {
+      expect(service.getUser(2342)).toEqual({ id: 2342, nombre: 'Loreto' });
+    });
 });

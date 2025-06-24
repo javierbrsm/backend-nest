@@ -9,18 +9,15 @@ export class AppController {
     private readonly dbManager: DbManagerService,
   ) {}
 
-  // localhost:3000/
   @Get()
   getHello(): string {
     return this.appService.getHello();
   }
-  // localhost:3000/hallo
   @Get('hallo')
   getHelloAleman(): string {
     return this.appService.getHelloAleman();
   }
 
-  // localhost:3000/hallo
   @Get('bonjour')
   getHelloFrances(): string {
     return this.appService.getHelloFrances();
@@ -28,6 +25,7 @@ export class AppController {
 
   @Get('espanol')
   getHelloEspanol(): string {
+     return this.appService.getHelloEspanol();
     return '';
   }
 

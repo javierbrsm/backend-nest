@@ -17,35 +17,202 @@ describe('OperacionesService', () => {
   });
 
   it('operacion deberia sumar', () => {
-    let a: any = 10;
-    let b = 30;
+  let a: any = 10;
+  let b: any  = 30;
+  expect(service.operar('suma', a, b)).toBe(40);
 
-    expect(service.operar('suma', a, b)).toBe(40);
+  a = -10;
+  b = 50;
+  expect(service.operar('suma', a, b)).toBe(40);
 
-    a = -10;
-    b = 50;
-    expect(service.operar('suma', a, b)).toBe(40);
+  a = -10;
+  b = -50;
+  expect(service.operar('suma', a, b)).not.toBe(-100);
 
-    a = -10;
-    b = -50;
-    expect(service.operar('suma', a, b)).not.toBe(-100);
+  a = Math.PI;
+  b = 30;
+  expect(service.operar('suma', a, b)).toBeCloseTo(33.14, 2);
 
-    a = Math.PI;
-    b = 30;
-    expect(service.operar('suma', a, b)).toBeCloseTo(33.14, 2);
+  a = null;
+  b = 50;
+  expect(service.operar('suma', a, b)).toBeNaN();
 
-    a = null;
-    b = 50;
-    expect(service.operar('suma', a, b)).toBeNaN();
+  a = 10;
+  b = null;
+  expect(service.operar('suma', a, b)).toBeNaN();
 
-    a = '10';
-    b = 50;
-    expect(service.operar('suma', a, b)).toBeNaN();
+  a = '10';
+  b = 50;
+  expect(service.operar('suma', a, b)).toBeNaN();
 
-    a = undefined;
-    b = 50;
-    expect(() => {
-      service.operar('suma', a, b);
-    }).toThrow('No se puede llamar con numeros indefinidos.');
-  });
+  a = undefined;
+  b = 50;
+  expect(() => {
+    service.operar('suma', a, b);
+  }).toThrow('No se puede llamar con números indefinidos.');
+});
+
+it('operacion deberia restar', () => {
+  let a: any = 50;
+  let b: any  = 10;
+  expect(service.operar('resta', a, b)).toBe(40);
+
+  a = Math.PI;
+  b = 30;
+  expect(service.operar('resta', a, b)).toBeCloseTo(-26.86, 2);
+
+  a = null;
+  b = 50;
+  expect(service.operar('resta', a, b)).toBeNaN();
+
+  a = 50;
+  b = null;
+  expect(service.operar('resta', a, b)).toBeNaN();
+
+  a = '10';
+  b = 50;
+  expect(service.operar('resta', a, b)).toBeNaN();
+
+  a = undefined;
+  b = 50;
+  expect(() => {
+    service.operar('resta', a, b);
+  }).toThrow();
+});
+
+it('operacion deberia multiplicar', () => {
+  let a: any = 2;
+  let b: any  = 3;
+  expect(service.operar('multiplicacion', a, b)).toBe(6);
+
+  a = -5;
+  b = -2;
+  expect(service.operar('multiplicacion', a, b)).toBe(10);
+
+  a = Math.PI;
+  b = 2;
+  expect(service.operar('multiplicacion', a, b)).toBeCloseTo(6.28, 2);
+
+  a = null;
+  b = 5;
+  expect(service.operar('multiplicacion', a, b)).toBeNaN();
+
+  a = 5;
+  b = null;
+  expect(service.operar('multiplicacion', a, b)).toBeNaN();
+
+  a = '5';
+  b = 5;
+  expect(service.operar('multiplicacion', a, b)).toBeNaN();
+
+  a = undefined;
+  b = 5;
+  expect(() => {
+    service.operar('multiplicacion', a, b);
+  }).toThrow();
+});
+
+it('operacion deberia dividir', () => {
+  let a: any = 10;
+  let b: any  = 2;
+  expect(service.operar('division', a, b)).toBe(5);
+
+  a = Math.PI;
+  b = 2;
+  expect(service.operar('division', a, b)).toBeCloseTo(1.57, 2);
+
+  a = 10;
+  b = 0;
+  expect(() => {
+    service.operar('division', a, b);
+  }).toThrow('División por cero no permitida.');
+
+  a = null;
+  b = 2;
+  expect(service.operar('division', a, b)).toBeNaN();
+
+  a = 10;
+  b = null;
+  expect(service.operar('division', a, b)).toBeNaN();
+
+  a = '10';
+  b = 2;
+  expect(service.operar('division', a, b)).toBeNaN();
+
+  a = undefined;
+  b = 2;
+  expect(() => {
+    service.operar('division', a, b);
+  }).toThrow();
+});
+
+it('operacion deberia potenciar', () => {
+  let a: any = 2;
+  let b:any = 3;
+  expect(service.operar('potencia', a, b)).toBe(8);
+
+  a = Math.PI;
+  b = 2;
+  expect(service.operar('potencia', a, b)).toBeCloseTo(9.87, 2);
+
+  a = null;
+  b = 2;
+  expect(service.operar('potencia', a, b)).toBeNaN();
+
+  a = 2;
+  b = null;
+  expect(service.operar('potencia', a, b)).toBeNaN();
+
+  a = '2';
+  b = 2;
+  expect(service.operar('potencia', a, b)).toBeNaN();
+
+  a = undefined;
+  b = 2;
+  expect(() => {
+    service.operar('potencia', a, b);
+  }).toThrow();
+});
+
+it('operacion deberia calcular factorial', () => {
+  let a: any = 5;
+  let b: any = 0;
+  expect(service.operar('factorial', a, b)).toBe(120);
+
+  a = 0;
+  expect(service.operar('factorial', a, b)).toBe(1);
+
+  a = -1;
+  expect(() => {
+    service.operar('factorial', a, b);
+  }).toThrow('Solo se permiten enteros positivos en factorial.');
+
+  a = Math.PI;
+  expect(() => {
+    service.operar('factorial', a, b);
+  }).toThrow('Solo se permiten enteros positivos en factorial.');
+
+  a = null;
+  expect(service.operar('factorial', a, b)).toBeNaN();
+
+  a = '5';
+  expect(service.operar('factorial', a, b)).toBeNaN();
+
+  a = undefined;
+  expect(() => {
+    service.operar('factorial', a, b);
+  }).toThrow();
+
+  a = 5;
+  b = null;
+  expect(service.operar('factorial', a, b)).toBe(120);
+
+  b = 'texto';
+  expect(service.operar('factorial', a, b)).toBe(120);
+
+  b = {};
+  expect(service.operar('factorial', a, b)).toBe(120);
+});
+
+
 });

@@ -34,7 +34,7 @@ describe('AppController (e2e)', () => {
       });
   });
 
-  it('/operaciones (GET)', () => {
+  it('/operaciones (GET) suma valida', () => {
     return request(app.getHttpServer())
       .get('/operaciones')
       .query({ operacion: 'suma', a: 100, b: 100 })
@@ -44,4 +44,63 @@ describe('AppController (e2e)', () => {
         expect(response.body.resultado).toBe(200);
       });
   });
+
+  it('/operaciones (GET) operación inválida', () => {
+    return request(app.getHttpServer())
+      .get('/operaciones')
+      .query({ operacion: 'raiz', a: 2, b: 3 })
+      .expect(500);
+  });
+
+  it('/operaciones (GET) falta a', () => {
+    return request(app.getHttpServer())
+      .get('/operaciones')
+      .query({ operacion: 'suma', b: 5 })
+      .expect(502);
+  });
+
+  it('/operaciones (GET) a como string', () => {
+    return request(app.getHttpServer())
+      .get('/operaciones')
+      .query({ operacion: 'suma', a: 'hola', b: 3 })
+      .expect(502);
+  });
+
+  it('/operaciones (GET) división por 0', () => {
+    return request(app.getHttpServer())
+      .get('/operaciones')
+      .query({ operacion: 'division', a: 10, b: 0 })
+      .expect(500);
+  });
+
+  it('/operaciones (GET) factorial negativo', () => {
+    return request(app.getHttpServer())
+      .get('/operaciones')
+      .query({ operacion: 'factorial', a: -5 })
+      .expect(500);
+  });
+
+
+  it('/operaciones (GET) factorial decimal', () => {
+    return request(app.getHttpServer())
+      .get('/operaciones')
+      .query({ operacion: 'factorial', a: 3.5 })
+      .expect(500);
+  });
+
+  it('/operaciones (GET) b como null ', () => {
+    return request(app.getHttpServer())
+      .get('/operaciones')
+      .query({ operacion: 'suma', a: 5, b: 'null' })
+      .expect(502);
+  });
+
+  it('/operaciones (GET) sin parámetro b (undefined)', () => {
+    return request(app.getHttpServer())
+      .get('/operaciones')
+      .query({ operacion: 'suma', a: 5 })
+      .expect(502);
+  });
+
+  
 });

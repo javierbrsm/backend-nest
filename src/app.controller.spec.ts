@@ -29,9 +29,22 @@ describe('AppController', () => {
       expect(appController.getHello()).toBe('Hello World!!');
     });
 
+    test('Probar "Hallo Welt!"', () => {
+      expect(appController.getHelloAleman()).toBe('Hallo Welt');
+    });
+
+    test('Probar "Bonjour le monde!"', () => {
+      expect(appController.getHelloFrances()).toBe('Bonjour le monde!');
+    });
+
+    test('Probar "¡Hola Mundo!"', () => {
+      expect(appController.getHelloEspanol()).toBe('Hola Mundo!!');
+    });
+
     it('Deberia buscar un id por usuario', () => {
       expect(appController.getUser(2342)).toEqual({ id: 1, nombre: 'Loreto' });
       expect(mockDbService.getUser).toHaveBeenLastCalledWith(2342);
     });
+    
   });
 });
