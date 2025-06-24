@@ -86,17 +86,21 @@ export class OperacionesService {
   }
 
   #factorial(a: number): number {
-    if (a === undefined) {
-      throw new Error('No se puede llamar con número indefinido.');
-    }
-    if (typeof a !== 'number') {
-      return NaN;
-    }
-    if (a < 0 || !Number.isInteger(a)) {
-      throw new Error('Solo se permiten enteros positivos en factorial.');
-    }
-    if (a === 0 || a === 1) return 1;
-    return a * this.#factorial(a - 1);
+  if (a === undefined) {
+    throw new Error('No se puede llamar con número indefinido.');
   }
+  if (typeof a !== 'number') {
+    return NaN;
+  }
+  if (a < 0 || !Number.isInteger(a)) {
+    throw new Error('Solo se permiten enteros positivos en factorial.');
+  }
+
+  let result = 1;
+  for (let i = 2; i <= a; i++) {
+    result *= i;
+  }
+  return result;
+}
 
 }
